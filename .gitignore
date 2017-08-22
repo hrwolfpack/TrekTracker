@@ -3,3 +3,5 @@ node_modules
 /client/dist/bundle.js
 
 /passport/config.json
+
+.DS_Store
