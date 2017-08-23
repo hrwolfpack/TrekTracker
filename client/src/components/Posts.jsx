@@ -17,7 +17,10 @@ const Posts = (props) => (
           </CardMedia>
           <div>
             <FlatButton label='Like' primary={true}/>
-
+            <FlatButton 
+            label='See More Posts About This Trail' 
+            primary={true}
+            onClick={() => {window.location.href = '/trail?id=' + post.trail_id}}/>
           </div>
         </Card>
       </div>
@@ -26,8 +29,3 @@ const Posts = (props) => (
 );
 
 export default Posts;
-
-          // <CardHeader
-          //   title={post.poster.firstname + ' ' + post.poster.lastname}
-          //   subtitle={post.poster.email}
-          // />

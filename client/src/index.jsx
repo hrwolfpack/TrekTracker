@@ -21,10 +21,10 @@ class App extends React.Component {
         <div className='content-wrap'>
           <Switch>
             <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route exact path='/posts'>
               <PostsContainer />
+            </Route>
+            <Route exact path='/map'>
+              <Home />
             </Route>
             <Route exact path='/login'>
               <Login/>
