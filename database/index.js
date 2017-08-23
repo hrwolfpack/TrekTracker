@@ -50,7 +50,10 @@ module.exports.getAllTrails = () => {
 };
 
 module.exports.getAllPosts = () => {
-  return models.posts.findAll();
+  return models.posts.findAll()
+  .then(posts => {
+    return replaceReferenceModelIdsWithModels(posts, 'poster_user_id', models.users, 'poster');
+  });
 };
 
 module.exports.createTrail = (id, name, directions = '', latitude = 0, longitude = 0) => {
