@@ -7,6 +7,13 @@ router.get('/currentUser', (req, res) => {
   res.send(req.user || null);
 });
 
+router.get('/posts', (req, res) => {
+  db.getAllPosts()
+  .then(posts => {
+    res.send(posts);
+  });
+});
+
 router.post('/posts', (req, res) => {
   var post = req.body.photo;
   db.createPost(req.user.email, post.trail_id, post.title, post.text, post.image_url, post.latitude, post.longitude)

@@ -49,6 +49,10 @@ module.exports.getAllTrails = () => {
   });
 };
 
+module.exports.getAllPosts = () => {
+  return models.posts.findAll();
+};
+
 module.exports.createTrail = (id, name, directions = '', latitude = 0, longitude = 0) => {
   if (!name || name.constructor !== String) {
     return new Promise((resolve, reject) => {

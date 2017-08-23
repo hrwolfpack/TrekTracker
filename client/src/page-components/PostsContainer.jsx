@@ -8,10 +8,17 @@ class PostsContainer extends React.Component {
 		this.state = {
 			posts: []
 		}
+		this.getAllPosts();
 	}
 
 	getAllPosts() {
-
+		axios.get('/api/posts')
+		.then(res => {
+			console.log(res.data);
+			this.setState({
+				posts: res.data
+			});
+		});
 	}
 
 	render() {
