@@ -7,6 +7,7 @@ import Home from './page-components/Home.jsx';
 import Login from './page-components/Login.jsx';
 import User from './page-components/User.jsx';
 import Trail from './page-components/Trail.jsx';
+import PostsContainer from './page-components/PostsContainer.jsx';
 import { lightBaseTheme, MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
 import './styles.css';
 axios.defaults.headers.common['Authorization'] = 'Client-ID 3ec73e8df33fffc';
@@ -21,6 +22,9 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/'>
               <Home />
+            </Route>
+            <Route exact path='/posts'>
+              <PostsContainer />
             </Route>
             <Route exact path='/login'>
               <Login/>
