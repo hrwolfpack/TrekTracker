@@ -186,7 +186,12 @@ module.exports.likePost = (user_id, post_id) => {
         like: true
       });
     } else {
-      return 'User already liked this post!';
+      return models.likes.update({
+        like: true}, {
+        where: {
+          userId: user_id,
+          postId: post_id}
+      });
     }
   });
 };
