@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vx/axis": "0.0.136",
     "@vx/gradient": "0.0.136",
     "@vx/group": "0.0.136",
     "@vx/mock-data": "0.0.136",
