@@ -65,30 +65,4 @@ class Posts extends React.Component {
   }
 }
 
-
-// const Posts = (props) => (
-//   <div>
-//     {props.posts.map((post, i) => (
-//       <div key={i}>
-//         <Card className='post'>
-//           <CardHeader
-//             title={post.poster.firstname + ' ' + post.poster.lastname}
-//             subtitle={post.poster.email}
-//           />
-//           <CardMedia overlay={<CardTitle title={post.text} subtitle={time.parse(post.createdAt, true)} />}>
-//             <img src={post['image_url']}/>
-//           </CardMedia>
-//           <div>
-//             <FlatButton label='Like' primary={true}/>
-//             <FlatButton 
-//             label='See More Posts About This Trail' 
-//             primary={true}
-//             onClick={() => {window.location.href = '/trail?id=' + post.trail_id}}/>
-//           </div>
-//         </Card>
-//       </div>
-//     ))}
-//   </div>
-// );
-
 export default Posts;
