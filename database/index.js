@@ -38,6 +38,17 @@ module.exports.getTrailsByName = (name) => {
   });
 };
 
+module.exports.getTrailById = (id) => {
+  return models.trails.findOne({
+    where: {id}
+  })
+  .then((trail) => {
+    trail.latitude = parseFloat(trail.latitude);
+    trail.longitude = parseFloat(trail.longitude);
+    return trail;
+  });
+};
+
 module.exports.getAllTrails = () => {
   return models.trails.findAll()
   .then((trails) => {
