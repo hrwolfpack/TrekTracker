@@ -112,8 +112,6 @@ class Home extends React.Component {
         <div className='col-narrow'>
           {this.state.markers.length > 0 ? <TrailList onClick={this.trailClick} markers={this.state.markers} /> : <CircularProgress size={200} thickness={10} style={{'width': '50%', 'position': 'relative', 'left': '25%'}} />}
         </div>
-        <div>
-        </div>
       </div>
     );
   }
