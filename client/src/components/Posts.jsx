@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
-import time from '../helpers/time.js'
+import FlatButton from 'material-ui/FlatButton';
+import time from '../helpers/time.js';
 
 const Posts = (props) => (
   <div>
@@ -14,6 +15,13 @@ const Posts = (props) => (
           <CardMedia overlay={<CardTitle title={post.text} subtitle={time.parse(post.createdAt, true)} />}>
             <img src={post['image_url']}/>
           </CardMedia>
+          <div>
+            <FlatButton label='Like' primary={true}/>
+            <FlatButton 
+            label='See More Posts About This Trail' 
+            primary={true}
+            onClick={() => {window.location.href = '/trail?id=' + post.trail_id}}/>
+          </div>
         </Card>
       </div>
     ))}
