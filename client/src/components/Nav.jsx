@@ -48,6 +48,7 @@ class Navbar extends React.Component {
           <MenuItem onClick={this.redirectTo.bind(this, '/map')}>Map View</MenuItem>
           <MenuItem onClick={this.redirectTo.bind(this, '/profile')}>Profile</MenuItem>
           <MenuItem onClick={this.redirectTo.bind(this, '/logout')}>Logout</MenuItem>
+          <MenuItem onClick={this.redirectTo.bind(this, '/popular')}>Popularity</MenuItem>
         </Drawer>
       </div>
     )
