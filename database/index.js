@@ -186,16 +186,12 @@ module.exports.likePost = (user_id, post_id) => {
         like: true
       });
     } else {
-<<<<<<< HEAD
       return models.likes.update({
         like: true}, {
         where: {
           userId: user_id,
           postId: post_id}
       });
-=======
-      return 'User already liked this post!';
->>>>>>> Add like and unlike db methods for Like Feature
     }
   });
 };
