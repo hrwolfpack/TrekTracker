@@ -39,6 +39,14 @@ router.get('/posts/trails/:trailId', (req, res) => {
   });
 });
 
+router.get('/trails/:trailId', (req, res) => {
+  let trailId = req.params.trailId;
+  db.getTrailById(trailId)
+  .then(trail => {
+    res.send(trail);
+  });
+});
+
 router.get('/trails', (req, res) => {
   let lat = `${req.query.lat || 34}`;
   let long = `${req.query.lng || -104}`;
