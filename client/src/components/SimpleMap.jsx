@@ -10,19 +10,14 @@ class SimpleMap extends Component {
         lng: this.props.marker.longitude
       },
     }
-
-  this.changeId = props.changeId;
-
   }
 
 	render() {
-
 		return (
 			<GoogleMap
 				defaultZoom={16}
         ref={this.props.handleMapMounted}
 				center={this.state.mapCenter}
-        onDragEnd={this.props.onDragEnd}
         >
         <Marker
           position={this.state.mapCenter}

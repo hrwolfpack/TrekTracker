@@ -46,6 +46,8 @@ class Trail extends React.Component {
               marker={this.state.marker}
               onDragEnd={this.onDragEnd}
               handleMapMounted={this.handleMapMounted}
+              onMarkerClose={this.onMarkerClose}
+              onMarkerClick={this.onMarkerClick}
               onPlacesChanged={this.onPlacesChanged}
               changeId={this.changeId}
             />
