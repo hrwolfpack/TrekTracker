@@ -121,6 +121,25 @@ Posts.belongsTo(Trails, {
 });
 models.posts = Posts;
 
+// LIKES SCHEMA
+var Likes = sequelize.define('likes', {
+  like: {
+    type: Sequelize.BOOLEAN,
+    notEmpty: true,
+    allowNull: false,
+    defaultValue: true
+  }
+});
+
+Posts.belongsToMany(Users, {
+  through: Likes
+});
+Users.belongsToMany(Posts, {
+  through: Likes
+});
+
+models.likes = Likes;
+
 
 // Sync database
 models.sequelize.sync().then(() => {
