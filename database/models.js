@@ -123,6 +123,11 @@ models.posts = Posts;
 
 // LIKES SCHEMA
 var Likes = sequelize.define('likes', {
+  id: {
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
   like: {
     type: Sequelize.BOOLEAN,
     notEmpty: true,
