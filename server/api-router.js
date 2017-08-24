@@ -25,6 +25,36 @@ router.post('/posts', (req, res) => {
   });
 });
 
+//for testing purpose, remove after socket integration
+router.post('/posts/like', (req, res) => {
+  // var postId = req.params.postId;
+  var {postId} = req.body;
+  if (req.user) {
+    db.likePost(req.user.id, postId)
+    .then(result => {
+      res.send(result);
+    });
+  } else {
+    res.send('not logged in');
+  }
+});
+//remove after 
+
+//for testing purpose, remove after socket integration
+router.post('/posts/unlike', (req, res) => {
+  // var postId = req.params.postId;
+  var {postId} = req.body;
+  if (req.user) {
+    db.unlikePost(req.user.id, postId)
+    .then(result => {
+      res.send(result);
+    });
+  } else {
+    res.send('not logged in');
+  }
+});
+//remove after 
+
 router.get('/posts/users/:useremail', (req, res) => {
   var userEmail = req.params.useremail;
   db.getPostsByUserEmail(userEmail).then((posts) => {

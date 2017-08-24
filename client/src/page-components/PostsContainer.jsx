@@ -14,7 +14,6 @@ class PostsContainer extends React.Component {
 	getAllPosts() {
 		axios.get('/api/posts')
 		.then(res => {
-			console.log(res.data);
 			this.setState({
 				posts: res.data
 			});

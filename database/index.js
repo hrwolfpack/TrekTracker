@@ -160,6 +160,40 @@ module.exports.getPostsByTrailId = (id) => {
   });
 };
 
+module.exports.likePost = (user_id, post_id) => {
+  return models.likes.findAll({
+    where: {
+      userId: user_id,
+      postId: post_id
+    }
+  })
+  .then(results => {
+    if (!results.length) {
+      return models.likes.create({
+        userId: user_id,
+        postId: post_id,
+        like: true
+      });
+    } else {
+      return models.likes.update({
+        like: true}, {
+        where: {
+          userId: user_id,
+          postId: post_id}
+      });
+    }
+  });
+};
+
+module.exports.unlikePost = (user_id, post_id) => {
+  return models.likes.update({
+    like: false}, {
+    where: {
+      userId: user_id,
+      postId: post_id}
+  });
+};
+
 // Used when getting an array of models that contain foreign keys
 // and, for each instance in the array, will replace the foreign
 // key with the model it is pointing to
