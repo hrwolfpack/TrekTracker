@@ -7,7 +7,6 @@ import SearchBox from 'react-google-maps/lib/places/SearchBox';
 import Nav from '../components/Nav.jsx';
 import TrailList from '../components/TrailList.jsx';
 import CircularProgress from 'material-ui/CircularProgress';
-import BarGraph from '../components/BarGraph.jsx';
 
 class Home extends React.Component {
   constructor(props) {
