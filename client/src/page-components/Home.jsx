@@ -8,7 +8,6 @@ import Nav from '../components/Nav.jsx';
 import TrailList from '../components/TrailList.jsx';
 import CircularProgress from 'material-ui/CircularProgress';
 
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
