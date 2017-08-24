@@ -26,8 +26,9 @@ router.post('/posts', (req, res) => {
 });
 
 //for testing purpose, remove after socket integration
-router.get('/posts/like/:postId', (req, res) => {
-  var postId = req.params.postId;
+router.post('/posts/like', (req, res) => {
+  // var postId = req.params.postId;
+  var {postId} = req.body;
   if (req.user) {
     db.likePost(req.user.id, postId)
     .then(result => {
@@ -40,8 +41,9 @@ router.get('/posts/like/:postId', (req, res) => {
 //remove after 
 
 //for testing purpose, remove after socket integration
-router.get('/posts/unlike/:postId', (req, res) => {
-  var postId = req.params.postId;
+router.post('/posts/unlike', (req, res) => {
+  // var postId = req.params.postId;
+  var {postId} = req.body;
   if (req.user) {
     db.unlikePost(req.user.id, postId)
     .then(result => {
