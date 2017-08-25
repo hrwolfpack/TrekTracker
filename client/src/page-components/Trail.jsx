@@ -14,7 +14,6 @@ class Trail extends React.Component {
       posts: [],
       currentUser: null
     }
-    this.handlePhotoSubmit = this.handlePhotoSubmit.bind(this);
   }
 
   componentDidMount() {
