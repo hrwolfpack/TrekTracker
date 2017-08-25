@@ -42,18 +42,18 @@ class Posts extends React.Component {
                 <img src={post['image_url']}/>
               </CardMedia>
               <div>
-                <FlatButton 
-                label='Like' 
-                primary={true} 
+                <FlatButton
+                label='Like'
+                primary={true}
                 secondary={true}
                 onClick={() => {this.handleLike(post.id)}}/>
-                <FlatButton 
-                label='Unlike' 
-                primary={false} 
+                <FlatButton
+                label='Unlike'
+                primary={false}
                 secondary={true}
                 onClick={() => {this.handleUnlike(post.id)}}/>
-                <FlatButton 
-                label='See More Posts About This Trail' 
+                <FlatButton
+                label='See More Posts About This Trail'
                 primary={true}
                 onClick={() => {window.location.href = '/trail?id=' + post.trail_id}}/>
               </div>

@@ -169,7 +169,10 @@ module.exports.submitImage = function(e) {
       trail_id: this.state.trailId,
     };
     return axios.post('/api/posts', {photo: metaPhoto})
-      .then(res => console.log('success: ', res))
+      .then(res => {
+        console.log('success: ', res);
+        window.location.reload();
+      })
       .catch(err => console.log('error in the /api/posts endpoint: ', err));
   })
   .catch((err, res) => {
