@@ -38,13 +38,6 @@ class Trail extends React.Component {
     });
   }
 
-  handlePhotoSubmit() {
-    axios.get('/api/posts/trails/' + this.state.trailId, {params:{trailId:this.state.trailId}})
-    .then((response) => {
-      this.setState({posts: response.data});
-    });
-  }
-
   render() {
     if (this.state.marker) {
       return (
@@ -63,7 +56,7 @@ class Trail extends React.Component {
             />
           </div>
           <div className='col-narrow'>
-            {this.state.currentUser ? <Upload handlePhotoSubmit={this.handlePhotoSubmit}/> : <div/>}
+            {this.state.currentUser ? <Upload /> : <div/>}
             <Posts posts={this.state.posts} />
           </div>
         </div>
