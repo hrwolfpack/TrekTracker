@@ -224,6 +224,19 @@ module.exports.run = () => {
       });
     });
 
+    describe('getAllPosts()', () => {
+      it('should return all posts in Posts table with poster property', () => {
+        return dbFuncs.getAllPosts()
+        .then(posts => {
+          expect(posts).to.exist;
+          posts.forEach(post => {
+            expect(post.poster).to.exist;
+          });
+        });
+      });
+    });
+
+
     describe('getPostsByUserEmail()', () => {
       it('Should exist', () => {
         expect(dbFuncs.getPostsByUserEmail).to.exist;
@@ -283,5 +296,109 @@ module.exports.run = () => {
         });
       });
     });
+
+    describe('likePost()', () => {
+      it('should exist', () => {
+        expect(dbFuncs.likePost).to.exist;
+      });
+      it('should be a function', () => {
+        expect(dbFuncs.likePost).to.be.a('function');
+      });
+      it('should insert new record into Like table if post has not been liked', () => {
+        return dbFuncs.likePost(db.users[0].id, 1)
+        .then(post => {
+          expect(post).to.exist;
+          expect(post.userId).to.equal(db.users[0].id);
+          expect(post.postId).to.equal(1);
+          expect(post.like).to.equal(true);
+        });
+      });
+      it('should not change like column if post is liked again', () => {
+        return dbFuncs.likePost(db.users[0].id, 1)
+        .then(post => {
+          return models.likes.findOne({where: {id: 1}});
+        })
+        .then(post => {
+          expect(post.like).to.equal(true);
+        });
+      });
+    });
+
+    describe('unlikePost()', () => {
+      it('should exist', () => {
+        expect(dbFuncs.unlikePost).to.exist;
+      });
+      it('should be a function', () => {
+        expect(dbFuncs.unlikePost).to.be.a('function');
+      });
+      it('should change like column to false when triggered', () => {
+        return dbFuncs.unlikePost(db.users[0].id, 1)
+        .then(post => {
+          return models.likes.findOne({where: {id :1}});
+        })
+        .then(post => {
+          expect(post.like).to.equal(false);
+        });
+      });
+      it('should not change like column if post is unliked again', () => {
+        return dbFuncs.unlikePost(db.users[0].id, 1)
+        .then(post => {
+          return models.likes.findOne({where: {id :1}});
+        })
+        .then(post => {
+          expect(post.like).to.equal(false);
+        });
+      });
+    });
+
+    describe('createLabels()', () => {
+      it('should exist', () => {
+        expect(dbFuncs.createLabels).to.exist;
+      });
+      it('should be a function', () => {
+        expect(dbFuncs.createLabels).to.be.a('function');
+      });
+      it('should insert labels into Labels table', () => {
+        var label1 = {
+          label: 'forest',
+          score: 0.94,
+          post_id: 1,
+          trail_id: db.trails[0].id
+        };
+        var label2 = {
+          label: 'coast',
+          score: 0.78,
+          post_id: 1,
+          trail_id: db.trails[0].id
+        };
+        var labels = [label1, label2];
+        return dbFuncs.createLabels(labels)
+        .then(labels => {
+          expect(labels.length).to.equal(labels.length);
+          expect(labels[0].label).to.equal(label1.label);
+          expect(labels[0].post_id).to.equal(label1.post_id);
+          expect(labels[1].score).to.equal(label2.score);
+          expect(labels[1].trail_id).to.equal(label2.trail_id);
+        });
+      });
+    });
+
+    describe('findLabelsByPostId()', () => {
+      it('should exist', () => {
+        expect(dbFuncs.findLabelsByPostId).to.exist;
+      });
+      it('should be a function', () => {
+        expect(dbFuncs.findLabelsByPostId).to.be.a('function');
+      });
+      it('should return labels with specified post id', () => {
+        return dbFuncs.findLabelsByPostId(1)
+        .then(labels => {
+          labels.forEach(label => {
+            expect(label.post_id).to.equal(1);
+          });
+        });
+      });
+    });
+
   });
 };

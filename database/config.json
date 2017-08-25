@@ -4,7 +4,8 @@
         "password": "",
         "database": "trektracker",
         "host": "localhost",
-        "dialect": "mysql"
+        "dialect": "mysql",
+        "logging": false
     },
     "test": {
         "username": "root",
