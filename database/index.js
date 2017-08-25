@@ -61,7 +61,7 @@ module.exports.getAllTrails = () => {
 };
 
 module.exports.getAllPosts = () => {
-  return models.posts.findAll()
+  return models.posts.findAll({order: [['updatedAt', 'DESC']]})
   .then(posts => {
     return replaceReferenceModelIdsWithModels(posts, 'poster_user_id', models.users, 'poster');
   });
