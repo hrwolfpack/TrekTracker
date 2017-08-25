@@ -38,7 +38,7 @@ router.post('/posts/like', (req, res) => {
     res.send('not logged in');
   }
 });
-//remove after 
+//remove after
 
 //for testing purpose, remove after socket integration
 router.post('/posts/unlike', (req, res) => {
@@ -53,7 +53,7 @@ router.post('/posts/unlike', (req, res) => {
     res.send('not logged in');
   }
 });
-//remove after 
+//remove after
 
 router.get('/posts/users/:useremail', (req, res) => {
   var userEmail = req.params.useremail;
