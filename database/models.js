@@ -145,6 +145,35 @@ Users.belongsToMany(Posts, {
 
 models.likes = Likes;
 
+// LABELS SCHEMA
+var Labels = sequelize.define('labels', {
+  id: {
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
+  label: {
+    type: Sequelize.STRING,
+    notEmpty: true,
+    allowNull: false
+  },
+  score: {
+    type: Sequelize.DECIMAL(10, 2),
+    notEmpty: true,
+    allowNull: false
+  } 
+});
+
+Labels.belongsTo(Posts, {
+  foreignKey: 'post_id'
+});
+Labels.belongsTo(Trails, {
+  foreignKey: 'trail_id'
+});
+
+models.labels = Labels;
+
+
 
 // Sync database
 models.sequelize.sync().then(() => {

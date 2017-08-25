@@ -7,25 +7,28 @@ const Vision = require('@google-cloud/vision');
 const vision = Vision();
 
 // The name of the image file to annotate
-const fileName = path.join(__dirname, 'bigsur.jpg');
-const imgUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Dean_Franklin_-_06.04.03_Mount_Rushmore_Monument_(by-sa)-3_new.jpg/1200px-Dean_Franklin_-_06.04.03_Mount_Rushmore_Monument_(by-sa)-3_new.jpg';
+// const fileName = path.join(__dirname, 'bigsur.jpg');
+// const imgUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/PRlight.jpg/260px-PRlight.jpg';
 
-// Prepare the request object
-const request = {
-  source: {
-    // filename: imgUrl
-    imageUri: imgUrl
-  }
-};
 
-// Performs label detection on the image file
-vision.labelDetection(request)
-  .then((results) => {
-    const labels = results[0].labelAnnotations;
+module.exports = (imgUrl) => {
+  // Prepare the request object
+  const request = {
+    source: {
+      // filename: fileName
+      imageUri: imgUrl
+    }
+  };
 
-    console.log('Labels:');
-    labels.forEach((label) => console.log(label.description));
-  })
-  .catch((err) => {
-    console.error('ERROR:', err);
-  });
+  // Performs label detection on the image file
+  return vision.labelDetection(request)
+    .then((results) => {
+      const labels = results[0].labelAnnotations;
+      return labels;
+      // console.log('Labels:');
+      // labels.forEach((label) => console.log(label));
+    })
+    .catch((err) => {
+      console.error('ERROR:', err);
+    });
+}

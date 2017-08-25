@@ -32,33 +32,7 @@ class Posts extends React.Component {
     return (
       <div>
         {this.props.posts.map((post, i) => (
-          <div key={i}>
-            <Card className='post'>
-              <CardHeader
-                title={post.poster.firstname + ' ' + post.poster.lastname}
-                subtitle={post.poster.email}
-              />
-              <CardMedia overlay={<CardTitle title={post.text} subtitle={time.parse(post.createdAt, true)} />}>
-                <img src={post['image_url']}/>
-              </CardMedia>
-              <div>
-                <FlatButton
-                label='Like'
-                primary={true}
-                secondary={true}
-                onClick={() => {this.handleLike(post.id)}}/>
-                <FlatButton
-                label='Unlike'
-                primary={false}
-                secondary={true}
-                onClick={() => {this.handleUnlike(post.id)}}/>
-                <FlatButton
-                label='See More Posts About This Trail'
-                primary={true}
-                onClick={() => {window.location.href = '/trail?id=' + post.trail_id}}/>
-              </div>
-            </Card>
-          </div>
+          <Post post={post} key={i} />
         ))}
       </div>
     );

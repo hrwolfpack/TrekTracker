@@ -2,6 +2,7 @@ var router = require('express').Router();
 var db = require('../database');
 var googleMaps = require('./foreign-apis/google-maps');
 var { getTrailsByLoc } = require('./foreign-apis/trails.js');
+var cloudVision = require('./foreign-apis/google-cloud-vision.js');
 
 router.get('/currentUser', (req, res) => {
   res.send(req.user || null);
@@ -16,9 +17,26 @@ router.get('/posts', (req, res) => {
 
 router.post('/posts', (req, res) => {
   var post = req.body.photo;
+  var post_id;
   db.createPost(req.user.email, post.trail_id, post.title, post.text, post.image_url, post.latitude, post.longitude)
-  .then((post) => {
-    res.end(JSON.stringify(post));
+  .then(post => {
+    post_id = post.id;
+    return cloudVision(post.image_url);
+  })
+  .then(labels => {
+    var labelsEntries = [];
+    labels.forEach(label => {
+      labelsEntries.push({
+        label: label.description,
+        score: label.score,
+        post_id: post_id,
+        trail_id: post.trail_id
+      });
+    });
+    return db.createLabels(labelsEntries);
+  })
+  .then(results => {
+    res.send('Post created and labeled!');
   })
   .catch((error) => {
     res.status(500).json(error);
