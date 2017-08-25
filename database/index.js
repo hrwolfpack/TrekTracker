@@ -216,6 +216,10 @@ module.exports.findLabelsByPostId = (postId) => {
   });
 };
 
+module.exports.getAllLabels = () => {
+  return models.labels.findAll({attributes: ['label']});
+}
+
 // Used when getting an array of models that contain foreign keys
 // and, for each instance in the array, will replace the foreign
 // key with the model it is pointing to
