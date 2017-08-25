@@ -207,7 +207,13 @@ module.exports.unlikePost = (user_id, post_id) => {
 
 module.exports.createLabels = (labelEntries) => {
   return models.labels.bulkCreate(labelEntries);
-}
+};
+
+module.exports.findLabelsByPostId = (postId) => {
+  return models.labels.findAll({
+    where: {post_id: postId}
+  });
+};
 
 // Used when getting an array of models that contain foreign keys
 // and, for each instance in the array, will replace the foreign

@@ -18,13 +18,23 @@ const styles = {
 class Post extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      labels: []
+    }
     this.handleLike = this.handleLike.bind(this);
     this.handleUnlike = this.handleUnlike.bind(this);
   }
 
   componentDidMount() {
     //get all the liked posts from user
-    
+
+    //get all labels for this post
+    axios.get(`/api/labels/${this.props.post.id}`)
+    .then(results => {
+      this.setState({
+        labels: results.data
+      });
+    });
   }
 
   handleLike() {
@@ -55,9 +65,9 @@ class Post extends React.Component {
             <img src={this.props.post['image_url']}/>
           </CardMedia>
           <div style={styles.wrapper}>
-            <Chip style={styles.chip}>Mountain</Chip>
-            <Chip style={styles.chip}>Lake</Chip>
-            <Chip style={styles.chip}>Tree</Chip>
+            {this.state.labels.map((label, i) => {
+              return (<Chip style={styles.chip} key={i}>{label.label}</Chip>);
+            })}
           </div>
           <div>
             <FlatButton 

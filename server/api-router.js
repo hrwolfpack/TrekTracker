@@ -73,6 +73,14 @@ router.post('/posts/unlike', (req, res) => {
 });
 //remove after
 
+router.get('/labels/:postId', (req, res) => {
+  var postId = req.params.postId;
+  db.findLabelsByPostId(postId)
+  .then(results => {
+    res.send(results);
+  });
+});
+
 router.get('/posts/users/:useremail', (req, res) => {
   var userEmail = req.params.useremail;
   db.getPostsByUserEmail(userEmail).then((posts) => {
