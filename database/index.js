@@ -159,7 +159,8 @@ module.exports.getPostsByUserEmail = (email) => {
 
 module.exports.getPostsByTrailId = (id) => {
   return models.posts.findAll({
-    where: {trail_id: id}
+    where: {trail_id: id},
+    order: [['updatedAt', 'DESC']]
   })
   .then((posts) => {
     for (let i = 0; i < posts.length; i++) {
