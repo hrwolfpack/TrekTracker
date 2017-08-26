@@ -400,5 +400,24 @@ module.exports.run = () => {
       });
     });
 
+    describe('getAllLabels()', () => {
+      it('should exist', () => {
+        expect(dbFuncs.getAllLabels).to.exist;
+      });
+      it('should be a function', () => {
+        expect(dbFuncs.getAllLabels).to.be.a('function');
+      });
+      it('should return all records with label attribute from Labels table', () => {
+        return dbFuncs.getAllLabels()
+        .then(labels => {
+          labels.forEach(label => {
+            expect(label.label).to.exist;
+          });
+        });
+      });
+    });
+
+    
+
   });
 };
