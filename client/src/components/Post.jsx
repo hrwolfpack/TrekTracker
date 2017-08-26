@@ -66,7 +66,7 @@ class Post extends React.Component {
           </CardMedia>
           <div style={styles.wrapper}>
             {this.state.labels.map((label, i) => {
-              return (<Chip style={styles.chip} key={i}>{label.label}</Chip>);
+              return (<Chip style={styles.chip} key={i} onClick={() => this.props.handleSearch(label.label)}>{label.label}</Chip>);
             })}
           </div>
           <div>

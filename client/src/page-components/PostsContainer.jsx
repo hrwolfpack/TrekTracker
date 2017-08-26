@@ -46,9 +46,9 @@ class PostsContainer extends React.Component {
 		});
 	}
 
-	handleSearch() {
+	handleSearch(e) {
 		axios.post('/api/labels/search', {
-			query: this.state.query
+			query: e
 		})
 		.then(results => {
 			console.log(results.data);
@@ -70,8 +70,8 @@ class PostsContainer extends React.Component {
 				<RaisedButton 
 				label="Search" 
 				primary={true} 
-				onClick={this.handleSearch}/>
-				<Posts posts={this.state.posts} />
+				onClick={() => this.handleSearch(this.state.query)}/>
+				<Posts posts={this.state.posts} handleSearch={this.handleSearch}/>
 			</div>
 		);
 	}
