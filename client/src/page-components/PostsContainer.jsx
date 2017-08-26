@@ -50,11 +50,11 @@ class PostsContainer extends React.Component {
 		axios.post('/api/labels/search', {
 			query: this.state.query
 		})
-		.then(posts => {
-			console.log(posts);
-			// this.setState({
-			// 	posts: posts
-			// });
+		.then(results => {
+			console.log(results.data);
+			this.setState({
+				posts: results.data
+			});
 		});
 	}
 

@@ -218,7 +218,15 @@ module.exports.findLabelsByPostId = (postId) => {
 
 module.exports.getAllLabels = () => {
   return models.labels.findAll({attributes: ['label']});
-}
+};
+
+module.exports.searchPosts = (query) => {
+  var queryStr = `select * from posts where id in (select post_id from labels where label like '%${query}%' group by post_id);`;
+  return models.sequelize.query(queryStr, {type: models.sequelize.QueryTypes.SELECT})
+  .then(posts => {
+    return replaceReferenceModelIdsWithModels(posts, 'poster_user_id', models.users, 'poster');
+  });
+};
 
 // Used when getting an array of models that contain foreign keys
 // and, for each instance in the array, will replace the foreign

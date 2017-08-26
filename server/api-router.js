@@ -94,7 +94,10 @@ router.get('/labels/:postId', (req, res) => {
 
 router.post('/labels/search', (req, res) => {
   var { query } = req.body;
-  res.send('got it');
+  db.searchPosts(query)
+  .then(posts => {
+    res.send(posts);
+  });
 })
 
 router.get('/posts/users/:useremail', (req, res) => {
