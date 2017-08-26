@@ -51,7 +51,6 @@ class PostsContainer extends React.Component {
 			query: e
 		})
 		.then(results => {
-			console.log(results.data);
 			this.setState({
 				posts: results.data
 			});
