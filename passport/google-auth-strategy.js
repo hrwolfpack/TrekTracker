@@ -1,11 +1,13 @@
 let passport = require('passport');
 let GoogleStrategy = require('passport-google-oauth2').Strategy;
 let users = require('../database/models.js').users;
-let config;
+var config;
 
-if (process.env.NODE_ENV === 'development') {
+var env = process.env.NODE_ENV || 'development';
+if (env === 'development') {
   config = require('./config.json');
 }
+
 
 module.exports = (passport) => {
   passport.use(new GoogleStrategy(
