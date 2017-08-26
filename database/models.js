@@ -9,9 +9,6 @@ if (env === 'development') {
   var sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL);
 }
 
-// var db_url = 'mysql://be33e609a60f6e:54690407@us-cdbr-iron-east-05.cleardb.net/heroku_92052b806ff7292?reconnect=true';
-// var sequelize = new Sequelize(db_url);
-
 var models = {};
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;
