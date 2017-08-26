@@ -73,6 +73,17 @@ router.post('/posts/unlike', (req, res) => {
 });
 //remove after
 
+router.get('/labels', (req, res) => {
+  db.getAllLabels()
+  .then(results => {
+    var labelsSet = new Set();
+    results.forEach(label => {
+      labelsSet.add(label.label);
+    });
+    res.send([...labelsSet]);
+  })
+})
+
 router.get('/labels/:postId', (req, res) => {
   var postId = req.params.postId;
   db.findLabelsByPostId(postId)
@@ -80,6 +91,14 @@ router.get('/labels/:postId', (req, res) => {
     res.send(results);
   });
 });
+
+router.post('/labels/search', (req, res) => {
+  var { query } = req.body;
+  db.searchPosts(query)
+  .then(posts => {
+    res.send(posts);
+  });
+})
 
 router.get('/posts/users/:useremail', (req, res) => {
   var userEmail = req.params.useremail;

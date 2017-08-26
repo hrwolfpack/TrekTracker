@@ -400,5 +400,40 @@ module.exports.run = () => {
       });
     });
 
+    describe('getAllLabels()', () => {
+      it('should exist', () => {
+        expect(dbFuncs.getAllLabels).to.exist;
+      });
+      it('should be a function', () => {
+        expect(dbFuncs.getAllLabels).to.be.a('function');
+      });
+      it('should return all records with label attribute from Labels table', () => {
+        return dbFuncs.getAllLabels()
+        .then(labels => {
+          labels.forEach(label => {
+            expect(label.label).to.exist;
+          });
+        });
+      });
+    });
+
+    describe('searchPosts()', () => {
+      it('should exist', () => {
+        expect(dbFuncs.searchPosts).to.exist;
+      });
+      it('should be a function', () => {
+        expect(dbFuncs.searchPosts).to.be.a('function');
+      });
+      it('should return posts associated with query label', () => {
+        dbFuncs.searchPosts('forest')
+        .then(posts => {
+          posts.forEach(post => {
+            expect(post).to.exist;
+            expect(post.poster).to.exist;
+          });
+        });
+      });
+    });
+
   });
 };

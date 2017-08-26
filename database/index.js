@@ -61,7 +61,7 @@ module.exports.getAllTrails = () => {
 };
 
 module.exports.getAllPosts = () => {
-  return models.posts.findAll()
+  return models.posts.findAll({order: [['updatedAt', 'DESC']]})
   .then(posts => {
     return replaceReferenceModelIdsWithModels(posts, 'poster_user_id', models.users, 'poster');
   });
@@ -159,7 +159,8 @@ module.exports.getPostsByUserEmail = (email) => {
 
 module.exports.getPostsByTrailId = (id) => {
   return models.posts.findAll({
-    where: {trail_id: id}
+    where: {trail_id: id},
+    order: [['updatedAt', 'DESC']]
   })
   .then((posts) => {
     for (let i = 0; i < posts.length; i++) {
@@ -212,6 +213,18 @@ module.exports.createLabels = (labelEntries) => {
 module.exports.findLabelsByPostId = (postId) => {
   return models.labels.findAll({
     where: {post_id: postId}
+  });
+};
+
+module.exports.getAllLabels = () => {
+  return models.labels.findAll({attributes: ['label']});
+};
+
+module.exports.searchPosts = (query) => {
+  var queryStr = `select * from posts where id in (select post_id from labels where label like '%${query}%' group by post_id);`;
+  return models.sequelize.query(queryStr, {type: models.sequelize.QueryTypes.SELECT})
+  .then(posts => {
+    return replaceReferenceModelIdsWithModels(posts, 'poster_user_id', models.users, 'poster');
   });
 };
 

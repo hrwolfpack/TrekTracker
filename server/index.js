@@ -61,6 +61,8 @@ app.get('*', (req, res) => {
 
 
 // Start server
-app.listen(process.env.PORT || 3000, function() {
+var server = app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port', process.env.PORT || 3000, '...');
 });
+
+module.exports = server;

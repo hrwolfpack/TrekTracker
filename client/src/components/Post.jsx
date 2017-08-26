@@ -19,17 +19,26 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      labels: []
+      labels: [],
+      postId: null
     }
     this.handleLike = this.handleLike.bind(this);
     this.handleUnlike = this.handleUnlike.bind(this);
+
   }
 
   componentDidMount() {
     //get all the liked posts from user
 
-    //get all labels for this post
-    axios.get(`/api/labels/${this.props.post.id}`)
+    this.getLabels(this.props.post.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.getLabels(nextProps.post.id);
+  }
+
+  getLabels(postId) {
+    axios.get(`/api/labels/${postId}`)
     .then(results => {
       this.setState({
         labels: results.data
@@ -66,7 +75,7 @@ class Post extends React.Component {
           </CardMedia>
           <div style={styles.wrapper}>
             {this.state.labels.map((label, i) => {
-              return (<Chip style={styles.chip} key={i}>{label.label}</Chip>);
+              return (<Chip style={styles.chip} key={i} onClick={() => this.props.handleSearch(label.label)}>{label.label}</Chip>);
             })}
           </div>
           <div>
