@@ -12,7 +12,7 @@ if (env === 'development') {
       "type": process.env.type || null,
       "project_id": process.env.project_id || null,
       "private_key_id": process.env.private_key_id || null,
-      "private_key": process.env.private_key || null,
+      "private_key": process.env.private_key.replace(/\\n/g, '\n') || null,
       "client_email": process.env.client_email || null,
       "client_id": process.env.client_id || null,
       "auth_uri": process.env.auth_uri || null,
