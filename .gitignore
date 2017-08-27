@@ -5,3 +5,7 @@ node_modules
 /passport/config.json
 
 .DS_Store
+
+GAC.config.json
+
+google.config.json
