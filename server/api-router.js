@@ -132,7 +132,7 @@ router.get('/trails', (req, res) => {
       res.end(JSON.stringify(err));
     } else {
       data.places.forEach(trail => {
-        db.createTrail(trail.unique_id, trail.name, trail.directions, trail.lat, trail.lon);
+        db.createTrail(trail.unique_id, trail.name, trail.activities[0].description, trail.directions, trail.lat, trail.lon, trail.city, trail.state, trail.activities[0].length, trail.activities[0].activity_type_name);
       });
       res.end(JSON.stringify(data));
     }

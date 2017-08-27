@@ -67,7 +67,7 @@ module.exports.getAllPosts = () => {
   });
 };
 
-module.exports.createTrail = (id, name, directions = '', latitude = 0, longitude = 0) => {
+module.exports.createTrail = (id, name, description = '', directions = '', latitude = 0, longitude = 0, city = '', state = '', length = 0, activity_type = '') => {
   if (!name || name.constructor !== String) {
     return new Promise((resolve, reject) => {
       reject('Expected trail name to be a non-empty string, but instead got ' + name);
@@ -90,7 +90,7 @@ module.exports.createTrail = (id, name, directions = '', latitude = 0, longitude
       return trail;
     }
     return models.trails.create({
-      id, name, directions, latitude, longitude
+      id, name, description, directions, latitude, longitude, city, state, length, activity_type
     });
   });
 };

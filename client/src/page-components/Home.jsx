@@ -54,6 +54,7 @@ class Home extends React.Component {
       });
     })
     .then(res => {
+      console.log(res);
       //Once we get trails from our particular area, we can then create markers on the map.
       res.data.places.forEach((trail) => {
         /*
@@ -71,6 +72,9 @@ class Home extends React.Component {
             name: trail.name,
             city: trail.city,
             state: trail.state,
+            description: trail.activities[0].description,
+            length: trail.activities[0].length,
+            activity_type: trail.activities[0].activity_type.name,
             //showInfo toggles the marker infowinow box. It is set to false right now, when the marker is clicked it will toggle to true.
             showInfo: false,
             trailId: trail.unique_id
