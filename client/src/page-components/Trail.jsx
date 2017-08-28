@@ -57,40 +57,40 @@ class Trail extends React.Component {
     if (this.state.marker) {
       console.log(this.state.marker)
       return (
-        <Grid>
-          <Row>
-            <div>
-              {this.state.currentUser ? <Upload /> : <div/>}
-            </div>
-          </Row>
-          <Row>
-            <Col md={5}>
-              <div className='Gmap'>
-                <SimpleMap
-                  containerElement={<div style={{width:100+'%', height:100+'%'}}/>}
-                  mapElement={<div style={{width:100+'%', height:100+'%'}}/>}
-                  marker={this.state.marker}
-                  onDragEnd={this.onDragEnd}
-                  handleMapMounted={this.handleMapMounted}
-                  onMarkerClose={this.onMarkerClose}
-                  onMarkerClick={this.onMarkerClick}
-                  onPlacesChanged={this.onPlacesChanged}
-                  changeId={this.changeId}
-                />
-              </div>
-            </Col>
-            <Col md={5}>
-              <div className='detail'>
-                <TrailDetail trail={this.state.marker}/>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={10}>
-              <PhotoGrid posts={this.state.posts} />
-            </Col>
-          </Row>
-        </Grid>
+        <div class='container'>
+          <Grid>
+            <Row>
+              <Col md={5}>
+                <div className='Gmap'>
+                  <SimpleMap
+                    containerElement={<div style={{width:100+'%', height:100+'%'}}/>}
+                    mapElement={<div style={{width:100+'%', height:100+'%'}}/>}
+                    marker={this.state.marker}
+                    onDragEnd={this.onDragEnd}
+                    handleMapMounted={this.handleMapMounted}
+                    onMarkerClose={this.onMarkerClose}
+                    onMarkerClick={this.onMarkerClick}
+                    onPlacesChanged={this.onPlacesChanged}
+                    changeId={this.changeId}
+                  />
+                </div>
+              </Col>
+              <Col md={5}>
+                <div className='detail'>
+                  <TrailDetail trail={this.state.marker}/>
+                  <div>
+                    {this.state.currentUser ? <Upload /> : <div/>}
+                  </div>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={10}>
+                <PhotoGrid posts={this.state.posts} />
+              </Col>
+            </Row>
+          </Grid>
+        </div>
       );
     } else {
       return (
