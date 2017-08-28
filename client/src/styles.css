@@ -8,8 +8,8 @@ body {
   margin: 1em;
 }
 .Gmap {
-  width: 700px;
-  height: 600px;
+  width: 500px;
+  height: 450px;
   float: left;
 }
 .TrailList {
@@ -36,6 +36,19 @@ body {
   float: right;
   min-height: 175px;
 }
+
+.miniMap {
+  width: 50%;
+  float: left;
+  min-height: 175px;
+}
+
+.detail {
+  float: right;
+  margin: 0 auto auto 20px;
+  min-height: 175px;
+}
+
 .view-posts {
   float: right;
 }

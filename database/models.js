@@ -69,6 +69,21 @@ var Trails = sequelize.define('trails', {
   },
   directions: {
     type: Sequelize.TEXT
+  },
+  description: {
+    type: Sequelize.TEXT
+  },
+  city: {
+    type: Sequelize.TEXT
+  },
+  state: {
+    type: Sequelize.TEXT
+  },
+  length: {
+    type: Sequelize.TEXT
+  },
+  activity_type: {
+    type: Sequelize.TEXT
   }
 });
 models.trails = Trails;
@@ -165,7 +180,7 @@ var Labels = sequelize.define('labels', {
     type: Sequelize.DECIMAL(10, 2),
     notEmpty: true,
     allowNull: false
-  } 
+  }
 });
 
 Labels.belongsTo(Posts, {

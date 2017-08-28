@@ -27,11 +27,10 @@ class Map extends Component {
 
 		return (
 			<GoogleMap
-				defaultZoom={13}
+				defaultZoom={11}
         ref={this.props.handleMapMounted}
 				center={this.props.mapCenter}
         onDragEnd={this.props.onDragEnd}
-
         >
         {this.props.markers.map((marker, index) => (
         <Marker
@@ -53,7 +52,7 @@ class Map extends Component {
 				  ref={this.props.onSearchBoxMounted}
 				  onPlacesChanged={this.props.onPlacesChanged}
 		 			controlPosition={google.maps.ControlPosition.TOP_LEFT}
-		 			inputPlaceholder="Search For Locations!!"
+		 			inputPlaceholder="Search For Locations..."
 					inputStyle={INPUT_STYLE}
 	 			/>
 
