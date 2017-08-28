@@ -54,7 +54,7 @@ class PhotoGrid extends React.Component {
       <div>
         <Modal className="modal-container"
          show={this.state.showModal}
-         onHide={this.close}
+         onHide={this.closeModal}
          animation={true}
          bsSize="large">
 
