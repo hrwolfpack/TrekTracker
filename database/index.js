@@ -60,9 +60,53 @@ module.exports.getAllTrails = () => {
   });
 };
 
-module.exports.getAllPosts = () => {
-  return models.posts.findAll({order: [['updatedAt', 'DESC']]})
-  .then(posts => {
+module.exports.toggleLikePost = (user_id, post_id) => {
+  let query0 = `
+  UPDATE likes L
+  SET L.like = CASE WHEN L.like = 1 THEN 0 ELSE 1 END
+  WHERE L.userId = ${user_id}
+  AND L.postId = ${post_id};`
+
+  let query1 = `
+  INSERT INTO likes (postId, userId, createdAt, updatedAt)
+  SELECT ${post_id}, ${user_id}, NOW(), NOW()
+  FROM (SELECT 1 AS dummy) dummy_table
+  WHERE NOT EXISTS (SELECT NULL
+                    FROM likes L2
+                    WHERE L2.postId = ${post_id}
+                    AND L2.userId = ${user_id}
+                  );`
+
+  let query2 = `
+  SELECT p.id, p.title, p.text, p.image_url, p.view_count, p.flag_count, p.longitude, p.createdAt, p.updatedAt, p.poster_user_id, p.trail_id, (
+    SELECT SUM(l.like)
+    FROM likes l
+    WHERE l.postId = p.id) AS totalLikes,
+    MAX(CASE WHEN l.like = 1 AND l.userId = ${user_id} AND l.postId = p.id THEN 1 ELSE 0 END) AS likedByCurrentuser
+  FROM posts p LEFT JOIN likes l
+  ON p.id = l.postId
+  GROUP BY p.id, p.title, p.text, p.image_url, p.view_count, p.flag_count, p.longitude, p.createdAt, p.updatedAt, p.poster_user_id, p.trail_id
+  ORDER BY p.updatedAt DESC`;
+
+  return models.sequelize.query(query0 + query1 + query2).spread((posts, metadata) => {
+    // Results will be an empty array and metadata will contain the number of affected rows.
+    return replaceReferenceModelIdsWithModels(posts[posts.length - 1], 'poster_user_id', models.users, 'poster');
+  });
+};
+
+module.exports.getAllPosts = (currentUserId) => {
+  let query = `SELECT p.id, p.title, p.text, p.image_url, p.view_count, p.flag_count, p.longitude, p.createdAt, p.updatedAt, p.poster_user_id, p.trail_id, (
+    SELECT SUM(l.like)
+    FROM likes l
+    WHERE l.postId = p.id) AS totalLikes,
+    MAX(CASE WHEN l.like = 1 AND l.userId = ${currentUserId} AND l.postId = p.id THEN 1 ELSE 0 END) AS likedByCurrentuser
+  FROM posts p LEFT JOIN likes l
+  ON p.id = l.postId
+  GROUP BY p.id, p.title, p.text, p.image_url, p.view_count, p.flag_count, p.longitude, p.createdAt, p.updatedAt, p.poster_user_id, p.trail_id
+  ORDER BY p.updatedAt DESC`;
+
+  return models.sequelize.query(query).spread((posts, metadata) => {
+    // Results will be an empty array and metadata will contain the number of affected rows.
     return replaceReferenceModelIdsWithModels(posts, 'poster_user_id', models.users, 'poster');
   });
 };

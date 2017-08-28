@@ -53,18 +53,18 @@ module.exports.run = () => {
     });
 
     // Wipe database when done testing
-    after(() => {
-      return sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
-      .then(() => {
-        return sequelize.sync({force: true});
-      })
-      .then(() => {
-        return sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
-      })
-      .then(() => {
-        return sequelize.sync();
-      });
-    });
+    // after(() => {
+    //   return sequelize.query('SET FOREIGN_KEY_CHECKS = 0')
+    //   .then(() => {
+    //     return sequelize.sync({force: true});
+    //   })
+    //   .then(() => {
+    //     return sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+    //   })
+    //   .then(() => {
+    //     return sequelize.sync();
+    //   });
+    // });
 
     describe('getUserByEmail()', () => {
       it('Should exist', () => {
@@ -224,17 +224,17 @@ module.exports.run = () => {
       });
     });
 
-    describe('getAllPosts()', () => {
-      it('should return all posts in Posts table with poster property', () => {
-        return dbFuncs.getAllPosts()
-        .then(posts => {
-          expect(posts).to.exist;
-          posts.forEach(post => {
-            expect(post.poster).to.exist;
-          });
-        });
-      });
-    });
+    // describe('getAllPosts()', () => {
+    //   it('should return all posts in Posts table with poster property', () => {
+    //     return dbFuncs.getAllPosts()
+    //     .then(posts => {
+    //       expect(posts).to.exist;
+    //       posts.forEach(post => {
+    //         expect(post.poster).to.exist;
+    //       });
+    //     });
+    //   });
+    // });
 
 
     describe('getPostsByUserEmail()', () => {
