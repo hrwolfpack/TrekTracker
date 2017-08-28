@@ -36,6 +36,18 @@ body {
   float: right;
   min-height: 175px;
 }
+
+.miniMap {
+  width: 50%;
+  float: left;
+  min-height: 175px;
+}
+
+.detail {
+  float: right;
+  margin: 0 auto auto 20px;
+  min-height: 175px;
+}
 .view-posts {
   float: right;
 }

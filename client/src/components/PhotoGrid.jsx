@@ -37,7 +37,6 @@ class PhotoGrid extends React.Component {
             {this.props.posts.map((photo, index) => (
               <GridTile
                 key={index}
-                title={photo.text}
               >
                 <img src={photo.image_url} />
               </GridTile>

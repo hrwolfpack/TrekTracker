@@ -7,9 +7,7 @@ class TrailDetail extends React.Component {
     super(props);
     this.state = {
       address: this.props.trail.city + ', ' + this.props.trail.state,
-      length: 'Trail length: ' + this.props.trail.length + ' miles',
-      activity: this.props.trail.activity_type,
-      description: 'Description: ' + this.props.trail.description
+      length: this.props.trail.length + ' miles',
     }
   }
 
@@ -22,8 +20,8 @@ class TrailDetail extends React.Component {
         />
       <CardText expandable={false}>
           <div>
-            <p>{this.state.length}</p>
-            <p>{this.state.description}</p>
+            <p><strong>Trail length: </strong>{this.state.length}</p>
+            <p><strong>Description: </strong>{this.props.trail.description}</p>
           </div>
         </CardText>
       </Card>

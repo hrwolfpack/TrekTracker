@@ -64,8 +64,8 @@ class Trail extends React.Component {
             </div>
           </Row>
           <Row>
-            <Col>
-              <div className='Gmap col-wide'>
+            <Col md={5}>
+              <div className='Gmap'>
                 <SimpleMap
                   containerElement={<div style={{width:100+'%', height:100+'%'}}/>}
                   mapElement={<div style={{width:100+'%', height:100+'%'}}/>}
@@ -79,8 +79,8 @@ class Trail extends React.Component {
                 />
               </div>
             </Col>
-            <Col>
-              <div className='col-narrow'>
+            <Col md={5}>
+              <div className='detail'>
                 <TrailDetail trail={this.state.marker}/>
               </div>
             </Col>
