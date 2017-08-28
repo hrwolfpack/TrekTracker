@@ -2,7 +2,7 @@
 
 var Sequelize = require('sequelize');
 var env = process.env.NODE_ENV || 'development';
-if (env === 'development') {
+if (env === 'development' || env === 'test') {
   var config = require('./config.json')[env];
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 } else {
