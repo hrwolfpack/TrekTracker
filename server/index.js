@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser');
 var authRouter = require('./auth-router.js');
 var session = require('express-session');
 var SessionStore = require('sessionstore');
+var io;
 
 let sessionStore = SessionStore.createSessionStore();
 
@@ -63,6 +64,19 @@ app.get('*', (req, res) => {
 // Start server
 var server = app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port', process.env.PORT || 3000, '...');
+});
+
+io = require('socket.io')(server);
+
+io.on('connection', (socket) => {
+  console.log('socket id', socket.id)
+
+  socket.on('getPosts', (data) => {
+    db.toggleLikePost(data.userId, data.postId)
+    .then((results) => {
+        io.emit('allPosts', results);
+    });
+  });
 });
 
 module.exports = server;

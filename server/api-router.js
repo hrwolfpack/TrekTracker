@@ -9,7 +9,7 @@ router.get('/currentUser', (req, res) => {
 });
 
 router.get('/posts', (req, res) => {
-  db.getAllPosts()
+  db.getAllPosts(req.query.userid)
   .then(posts => {
     res.send(posts);
   });
